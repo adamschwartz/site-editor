@@ -1,0 +1,6 @@
+{
+  "name": "site-editor",
+  "version": "1.0.0",
+  "description": "Edit regions of websites live, in place, using Cloudflare Workers and KV.",
+  "main": "index.js"
+}
