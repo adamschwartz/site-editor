@@ -58,14 +58,18 @@ const applySiteEditorTransformations = async (response, settings) => {
         element.setInnerContent(value, { html: true })
       }
     })
-    .on("body", {
-      element(element) {
-        element.append(`
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.4.2/tinymce.min.js" referrerpolicy="origin"></script>
-          <script src="${settings.basePath}/client-js"></script>
-        `, { html: true })
-      }
-    })
+
+  if (settings.allowEditing) {
+    rewriter
+      .on("body", {
+        element(element) {
+          element.append(`
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.4.2/tinymce.min.js" referrerpolicy="origin"></script>
+            <script src="${settings.basePath}/client-js"></script>
+          `, { html: true })
+        }
+      })
+  }
 
   return rewriter.transform(response)
 }
